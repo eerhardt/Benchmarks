@@ -152,6 +152,7 @@ namespace Benchmarks
                     {
                         if (threadCount > 0)
                         {
+                            socketOptions.Backlog = int.MaxValue;
                             socketOptions.IOQueueCount = threadCount;
                         }
 
@@ -279,7 +280,6 @@ namespace Benchmarks
                     listenOptions.Protocols = HttpProtocols.Http2;
                 }
 #endif
-
                 if (urlPrefix.IsHttps)
                 {
                     listenOptions.UseHttps("testCert.pfx", "testPassword");
