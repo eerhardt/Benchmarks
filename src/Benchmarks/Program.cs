@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Net.Sockets;
 using Benchmarks.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.HttpSys;
@@ -152,6 +153,13 @@ namespace Benchmarks
                     {
                         if (threadCount > 0)
                         {
+                            socketOptions.CreateBoundListenSocket = e => 
+                            {
+                                var socket = new Socket(new SafeSocketHandle((IntPtr)fileHandle.FileHandle, ownsHandle: true));
+                                socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.DontLinger, false);
+                                socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+                            };
+                            
                             socketOptions.Backlog = int.MaxValue;
                             socketOptions.IOQueueCount = threadCount;
                         }
