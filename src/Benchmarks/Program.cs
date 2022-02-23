@@ -155,7 +155,7 @@ namespace Benchmarks
                         {
                             socketOptions.CreateBoundListenSocket = e => 
                             {
-                                var socket = new Socket(new SafeSocketHandle((IntPtr)fileHandle.FileHandle, ownsHandle: true));
+                                var socket = listenSocket = new Socket(((IPEndPoint)e).AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                                 socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.DontLinger, false);
                                 socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
                             };
