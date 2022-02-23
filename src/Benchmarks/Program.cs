@@ -158,6 +158,7 @@ namespace Benchmarks
                                 var socket = new Socket(((IPEndPoint)e).AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                                 socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.DontLinger, false);
                                 socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+                                return socket;
                             };
                             
                             socketOptions.Backlog = int.MaxValue;
