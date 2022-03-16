@@ -1,5 +1,5 @@
 ﻿imports:
-  - https://github.com/aspnet/Benchmarks/blob/main/scenarios/te.benchmarks.yml?raw=true
+  - https://github.com/aspnet/Benchmarks/blob/sebros/te/scenarios/te.benchmarks.yml?raw=true
 
 jobs:
   aspnet:
