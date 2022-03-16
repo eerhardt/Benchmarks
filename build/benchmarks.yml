@@ -159,7 +159,7 @@ jobs:
       # Intel_Linux:
       #   profile: aspnet-citrine-lin
       Ampere_Linux:
-        profile: aspnet-citrine-amperes
+        profile: aspnet-perf-lin
   steps:
   - template: containers-scenarios.yml
     parameters:
