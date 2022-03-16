@@ -1,0 +1,44 @@
+﻿imports:
+  - https://github.com/aspnet/Benchmarks/blob/sebros/te/scenarios/te.benchmarks.yml?raw=true
+
+jobs:
+  aspnet:
+    variables:
+      protocol: http
+      server: Kestrel
+      transport: Sockets
+      scenario: plaintext
+      serverPort: 5000
+    source:
+      repository: https://github.com/aspnet/benchmarks.git
+      branchOrCommit: main
+      dockerFile: docker/container-matrix/Middleware.dockerfile
+      dockerImageName: app
+      dockerContextDirectory: .
+      dockerCommand: "--nonInteractive true --scenarios {{scenario}} --urls {{protocol}}://[*]:{{serverPort}} --server {{server}} --kestrelTransport {{transport}} --protocol {{protocol}} {{databaseCmd}}"
+    readyStateText: Application started.
+    environmentVariables:
+      database: "PostgreSQL"
+      connectionString: "Server={{databaseServer}};Database=hello_world;User Id=benchmarkdbuser;Password=benchmarkdbpass;Maximum Pool Size=256;NoResetOnClose=true;Enlist=false;Max Auto Prepare=4"
+    noClean: true
+
+scenarios:
+  json_aspnet:
+    application:
+      job: aspnet
+    load:
+      job: bombardier
+      variables:
+        presetHeaders: json
+        path: /json
+
+  fortunes_aspnet:
+    db:
+      job: postgresql
+    application:
+      job: aspnet
+    load:
+      job: bombardier
+      variables:
+        presetHeaders: html
+        path: /fortunes
