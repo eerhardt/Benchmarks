@@ -27,6 +27,8 @@ scenarios:
   json_aspnet:
     application:
       job: aspnet
+      variables:
+        scenario: json
     load:
       job: bombardier
       variables:
@@ -39,9 +41,11 @@ scenarios:
       job: postgresql
     application:
       job: aspnet
+      variables:
+        scenario: dbfortunesraw
     load:
       job: bombardier
       variables:
         presetHeaders: html
-        path: /fortunes
+        path: /fortunes/raw
         serverPort: 8080
