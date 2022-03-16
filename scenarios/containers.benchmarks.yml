@@ -32,6 +32,7 @@ scenarios:
       variables:
         presetHeaders: json
         path: /json
+        serverPort: 8080
 
   fortunes_aspnet:
     db:
@@ -43,3 +44,4 @@ scenarios:
       variables:
         presetHeaders: html
         path: /fortunes
+        serverPort: 8080
