@@ -4,12 +4,6 @@ imports:
   - https://github.com/aspnet/Benchmarks/blob/main/scenarios/aspnet.profiles.yml?raw=true
 
 jobs:
-  aspnet:
-    source:
-      repository: https://github.com/TechEmpower/FrameworkBenchmarks.git
-      branchOrCommit: master
-      dockerContextDirectory: frameworks/CSharp/aspnetcore/
-    readyStateText: Application started.
 
   nodejs:
     source:
@@ -283,58 +277,6 @@ scenarios:
       variables:
         presetHeaders: json
         path: /json
-        serverPort: 8080
-
-  # ASP.NET
-  plaintext_aspnet:
-    application:
-      job: aspnet
-    load:
-      job: wrk
-      variables:
-        presetHeaders: plaintext
-        path: /plaintext
-        pipeline: 16
-        serverPort: 8080
-
-  json_aspnet:
-    application:
-      job: aspnet
-    load:
-      job: bombardier
-      variables:
-        presetHeaders: json
-        path: /json
-        serverPort: 8080
-        
-  fortunes_aspnet:
-    db:
-      job: postgresql
-    application:
-      job: aspnet
-      source:
-          dockerFile: frameworks/CSharp/aspnetcore/aspcore-mw-ado-pg.dockerfile
-          dockerImageName: aspcore-mw-ado-pg
-    load:
-      job: bombardier
-      variables:
-        presetHeaders: html
-        path: /fortunes/raw
-        serverPort: 8080
-
-  fortunes_mysql_aspnet:
-    db:
-      job: mysql
-    application:
-      job: aspnet
-      source:
-          dockerFile: frameworks/CSharp/aspnetcore/aspcore-mw-ado-my.dockerfile
-          dockerImageName: aspcore-mw-ado-my
-    load:
-      job: bombardier
-      variables:
-        presetHeaders: html
-        path: /fortunes/raw
         serverPort: 8080
 
   # Wizzardo (Java)
