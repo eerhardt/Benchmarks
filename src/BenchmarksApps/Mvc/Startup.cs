@@ -69,13 +69,13 @@ namespace Mvc
 
 #if AUTHORIZE
             services.AddAuthorization();
-            services.AddCors(o =>
-            {
-                o.AddDefaultPolicy(o2 =>
-                {
-                    o2.AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowed(s => true);
-                });
-            });
+            //services.AddCors(o =>
+            //{
+            //    o.AddDefaultPolicy(o2 =>
+            //    {
+            //        o2.AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowed(s => true);
+            //    });
+            //});
 #endif
 
         }
@@ -93,7 +93,7 @@ namespace Mvc
 
             app.UseRouting();
 #endif
-            app.UseCors();
+            //app.UseCors();
 
 #if JWTAUTH || CERTAUTH
             logger.LogInformation("MVC is configured to use Authentication.");
