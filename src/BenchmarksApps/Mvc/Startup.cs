@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http;
 
 namespace Mvc
 {
@@ -67,6 +69,13 @@ namespace Mvc
 
 #if AUTHORIZE
             services.AddAuthorization();
+            services.AddCors(o =>
+            {
+                o.AddDefaultPolicy(o2 =>
+                {
+                    o2.AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowed(s => true);
+                });
+            });
 #endif
 
         }
@@ -80,8 +89,11 @@ namespace Mvc
                 logger.LogInformation("MVC is configured to use Newtonsoft.Json.");
             }
 
+
+
             app.UseRouting();
 #endif
+            app.UseCors();
 
 #if JWTAUTH || CERTAUTH
             logger.LogInformation("MVC is configured to use Authentication.");
@@ -93,6 +105,20 @@ namespace Mvc
             app.UseAuthorization();
 #endif
 
+            //app.Use((c, n) =>
+            //{
+            //    var j = new JwtSecurityTokenHandler();
+            //    var s = new SymmetricSecurityKey(Convert.FromBase64String("MFswDQYJKoZIhvcNAQEBBQADSgAwRwJAca32BtkpByiveJTwINuEerWBg2kac7sb"));
+
+            //    var claims = new[] { new Claim(ClaimTypes.NameIdentifier, "test"), new Claim(ClaimTypes.Email, "test@test.com"), new Claim("sub", "test@test.com") };
+            //    var credentials = new SigningCredentials(s, SecurityAlgorithms.HmacSha256);
+            //    var token = new JwtSecurityToken("Test", "test", claims, expires: DateTime.UtcNow.AddYears(11), signingCredentials: credentials);
+            //    var s2 = j.WriteToken(token);
+
+            //    var user = c.User;
+
+            //    return n();
+            //});
 #if ONLYAUTH
             logger.LogInformation("MVC is configured to skip Endpoints.");
 
