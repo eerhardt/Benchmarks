@@ -31,6 +31,10 @@ namespace Mvc
                         .ConfigureKestrel(options =>
                         {
 #if CERTAUTH
+                            options.ConfigureEndpointDefaults(o =>
+                            {
+                                o.Protocols = HttpProtocols.Http1;
+                            });
                             options.ConfigureHttpsDefaults(opt =>
                             {
                                 opt.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
