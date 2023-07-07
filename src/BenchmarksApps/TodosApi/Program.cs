@@ -10,8 +10,8 @@ builder.Logging.ClearProviders();
 builder.Services.ConfigureAppSettings(builder.Configuration, builder.Environment);
 
 // Configure authentication & authorization
-builder.Services.AddAuthentication().AddJwtBearer();
-builder.Services.ConfigureOptions<JwtConfiguration>();
+builder.Services.AddAuthentication();//.AddJwtBearer();
+//builder.Services.ConfigureOptions<JwtConfiguration>();
 builder.Services.AddAuthorization();
 
 // Configure data access
@@ -25,8 +25,8 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 
 // Configure health checks
 builder.Services.AddHealthChecks()
-    .AddCheck<DatabaseHealthCheck>("Database", timeout: TimeSpan.FromSeconds(2))
-    .AddCheck<JwtHealthCheck>("JwtAuthentication");
+    .AddCheck<DatabaseHealthCheck>("Database", timeout: TimeSpan.FromSeconds(2));
+    //.AddCheck<JwtHealthCheck>("JwtAuthentication");
 
 // Problem details
 builder.Services.AddProblemDetails();

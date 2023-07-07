@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿/*
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -70,3 +71,4 @@ internal class JwtOptionsSummary
 internal partial class JwtOptionsJsonSerializerContext : JsonSerializerContext
 {
 }
+*/
