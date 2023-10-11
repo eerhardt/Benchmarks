@@ -23,8 +23,8 @@ jobs:
     arguments: "--urls {{serverScheme}}://{{serverAddress}}:{{serverPort}}"
   todosapiaspnetbenchmarks:
     source:
-      repository: https://github.com/aspnet/benchmarks.git
-      branchOrCommit: main
+      repository: https://github.com/eerhardt/benchmarks.git
+      branchOrCommit: npgsql-rc2-localbranch
       project: src/BenchmarksApps/TodosApi/TodosApi.csproj
     readyStateText: Application started.
     variables:
