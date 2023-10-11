@@ -12,8 +12,8 @@ variables:
 jobs:
   aspnetbenchmarks:
     source:
-      repository: https://github.com/aspnet/benchmarks.git
-      branchOrCommit: main
+      repository: https://github.com/eerhardt/benchmarks.git
+      branchOrCommit: npgsql-rc2-localbranch
       project: src/Benchmarks/Benchmarks.csproj
     readyStateText: Application started.
     variables:
